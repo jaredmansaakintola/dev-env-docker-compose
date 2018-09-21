@@ -34,8 +34,7 @@ services:
       - ./microservice:/microservices
     ports:
       - 9090:9090
-    command: 
-      - ["python", './demo/demo_rpc.py']
+    command: "python ./demo/demo_rpc.py"
 
   # The Database
   # database:
