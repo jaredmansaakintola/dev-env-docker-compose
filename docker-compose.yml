@@ -1,8 +1,8 @@
-version: '2'
+version: '3'
 services:
 
   # Laravel Restful Service
-  app:
+  laravel-service:
     build:
       context: ./
       dockerfile: laravel.dockerfile
@@ -19,8 +19,8 @@ services:
       context: ./
       dockerfile: web.dockerfile
     working_dir: /var/www
-    volumes_from:
-      - app
+    volumes:
+      - laravel-service
     ports:
       - 8080:80
 
@@ -34,11 +34,15 @@ services:
       - ./microservices:/microservices
     ports:
       - 9090:9090
+    # Runs each of the micro services and maybe deals with a toggle
+    # thats where ansible comes in 
     command: "python ./demo/demo_rpc.py"
 
   # Flask Restful Service
   # flask-service:
-  #   build: ./flask  # path is relative to docker-compose.yml location
+  #   build: 
+  #     context: ./  # path is relative to docker-compose.yml location
+      # dockerfile: flask.dockerfile
   #   volumes:
   #     - ./app:/usr/src/flask # mount point
   #   ports:

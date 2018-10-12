@@ -38,6 +38,9 @@ RUN buildDeps=" \
 	&& rm -rf go \
 	&& apt-get purge -y --auto-remove $buildDeps
 
-	RUN apt-get update && apt-get install -y python
+RUN apt-get update && apt-get install -y python
 
-CMD [ "thrift" ]
+ADD rpc.thrift /
+RUN thrift --gen php rpc.thrift
+RUN thrift --gen py:utf8strings rpc.thrift
+
