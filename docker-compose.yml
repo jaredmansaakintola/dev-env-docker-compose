@@ -1,11 +1,11 @@
 version: '2'
 services:
 
-  # The Application
+  # Laravel Restful Service
   app:
     build:
       context: ./
-      dockerfile: app.dockerfile
+      dockerfile: laravel.dockerfile
     working_dir: /var/www
     volumes:
       - ./:/var/www
@@ -35,6 +35,14 @@ services:
     ports:
       - 9090:9090
     command: "python ./demo/demo_rpc.py"
+
+  # Flask Restful Service
+  # flask-service:
+  #   build: ./flask  # path is relative to docker-compose.yml location
+  #   volumes:
+  #     - ./app:/usr/src/flask # mount point
+  #   ports:
+  #     - 5000:5000  # host:container
 
   # The Database
   # database:
