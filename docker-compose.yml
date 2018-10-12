@@ -31,7 +31,7 @@ services:
       dockerfile: thrift.dockerfile
     working_dir: /microservices
     volumes:
-      - ./microservice:/microservices
+      - ./microservices:/microservices
     ports:
       - 9090:9090
     command: "python ./demo/demo_rpc.py"

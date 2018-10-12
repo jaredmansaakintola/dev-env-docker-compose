@@ -38,4 +38,6 @@ RUN buildDeps=" \
 	&& rm -rf go \
 	&& apt-get purge -y --auto-remove $buildDeps
 
+	RUN apt-get update && apt-get install -y python
+
 CMD [ "thrift" ]
