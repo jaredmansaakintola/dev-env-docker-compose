@@ -19,7 +19,6 @@ RUN buildDeps=" \
 		make \
 		pkg-config \
 	"; \
-
 	apt-get update && apt-get install -y --no-install-recommends $buildDeps && rm -rf /var/lib/apt/lists/* \
 	&& curl -sSL "http://apache.mirrors.spacedump.net/thrift/$THRIFT_VERSION/thrift-$THRIFT_VERSION.tar.gz" -o thrift.tar.gz \
 	&& mkdir -p /usr/src/thrift \
@@ -38,9 +37,7 @@ RUN buildDeps=" \
 	&& rm -rf go \
 	&& apt-get purge -y --auto-remove $buildDeps
 
-RUN apt-get update && apt-get install -y python
-
-ADD rpc.thrift /
-RUN thrift --gen php rpc.thrift
-RUN thrift --gen py:utf8strings rpc.thrift
-
+ADD /microservices /microservices
+RUN thrift -v -o /microservices --gen php /microservices/rpc.thrift
+RUN python /microservices/demo/demo.py
+# CMD ["thrift"] 

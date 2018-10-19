@@ -19,8 +19,6 @@ services:
       context: ./
       dockerfile: web.dockerfile
     working_dir: /var/www
-    volumes:
-      - laravel-service
     ports:
       - 8080:80
 
@@ -36,7 +34,10 @@ services:
       - 9090:9090
     # Runs each of the micro services and maybe deals with a toggle
     # thats where ansible comes in 
-    command: "python ./demo/demo_rpc.py"
+    # command: "thrift -help"
+    # command: "thrift --gen php microservices/rpc.thrift && thrift --gen py:utf8strings ./microservices/rpc.thrift"
+    # command: "thrift --gen php rpc.thrift && thrift --gen py:utf8strings rpc.thrift"
+    # $ docker run -v "$PWD:/data" thrift thrift -o /data --gen rb /data/service.thrift
 
   # Flask Restful Service
   # flask-service:
@@ -62,4 +63,4 @@ services:
   #       - "33061:3306"
 
 volumes:
-  dbdata:
+  laravel-service:
